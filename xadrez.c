@@ -1,59 +1,79 @@
 #include <stdio.h>
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
 
-int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
-    const int moveBase = 5;
-    const int moveBai = 2;
-    int cont = 1;
-    
-    //EXPLICAÇAO: 
-    // for significa PARA, ou seja, para cada contador, vai realizar o código
-    // no caso, PARA cada I, ESCREVER "cima" e ADICIONAR AO CONTADOR I
+// Nível Mestre - Funções Recursivas e Loops Aninhados
 
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
-    printf("\n\nMovimentação do Bispo.\n\n");
-    for(int i = 0; i < moveBase; i++){
-        printf("Cima esquerda\n");
+
+void torreRec(int casas){
+    if(casas == 0)
+        return;
+
+    printf("Esquerda\n");
+    torreRec(casas - 1);
+}
+
+void queenRec(int casas){
+    if(casas == 0)
+        return;
+
+    printf("Cima\n");
+    queenRec(casas - 1);
+}
+
+void bispoRec(int casas){
+    if(casas == 0)
+        return;
+
+    // loops aninhados: vertical fora, horizontal dentro
+    for(int v = 0; v < 1; v++){
+        printf("Cima\n");
+
+        for(int h = 0; h < 1; h++){
+            printf("Direita\n");
+        }
     }
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
-    printf("\n\nMovimentação da Torre.\n\n");
-    for(int i = 0; i < moveBase; i++){
-        printf("Esquerda\n");
+
+    bispoRec(casas - 1);
+}   
+
+/* 
+    const int moveBase = 5; 
+    printf("\n\nMovimentação do Bispo.\n\n"); 
+    for(int i = 0; i < moveBase; i++){ 
+        printf("Cima esquerda\n"); 
     }
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
-    
-    printf("\n\nMovimentação da Rainha.\n\n");
-    for (int i = 0; i < moveBase; i++){
+    */
+
+void cavalo(){
+    const int vertical = 2;
+    const int horizontal = 1;
+
+    printf("\nMovimentação do Cavalo\n\n");
+
+    for(int v = 0; v < vertical; v++){
+        if(v < 0) continue;
         printf("Cima\n");
     }
-    
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
 
-    printf("\n\nMovimentação do Cavalo\n\n");
-
-    while (cont--);{            // O Cont é uma variável para contar quantas vezes o loop while vai repetir
-        for(int i = 0; i < moveBai; i++){       //moveBai conta quantos movimentos para baixo vai fazer, repetindo o printf("Baixo\n");
-        printf("Baixo\n");
-        
-        }
-        printf("Esquerda");
+    for(int h = 0; h < horizontal; h++){
+        if(h > 1) break;
+        printf("Direita\n");
     }
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
+}
 
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
+int main(){
+    int casas = 5;
+
+    printf("\nMovimentação da Torre\n\n");
+    torreRec(casas);
+
+    printf("\nMovimentação do Bispo\n\n");
+    bispoRec(casas);
+
+    printf("\nMovimentação da Rainha\n\n");
+    queenRec(casas);
+
+    cavalo();
 
     return 0;
 }
